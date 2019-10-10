@@ -10,13 +10,16 @@ composer require --dev squizlabs/php_codesniffer phpstan/phpstan phpmd/phpmd fri
 ## Composer scripts
 ```json
 {
-    "scripts": {
-        "inspect": [
-            "vendor/bin/phpcs",
-            "vendor/bin/phpstan analyze src"
-        ],
-        "inspect-fix": "vendor/bin/php-cs-fixer fix src",
-        "insights" : "vendor/bin/phpmd src text phpmd.xml"
-    }
+  "scripts": {
+    "inspect": [
+      "vendor/bin/phpcs",
+      "vendor/bin/phpstan analyze src"
+    ],
+    "inspect-fix": [
+      "vendor/bin/php-cs-fixer fix src",
+      "vendor/bin/phpcbf"
+    ],
+    "insights": "vendor/bin/phpmd src text phpmd.xml"
+  }
 }
 ```
