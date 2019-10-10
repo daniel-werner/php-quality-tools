@@ -2,6 +2,8 @@
 
 namespace DanielWerner\PhpQualityTools;
 
+use Composer\Json\JsonFormatter;
+
 class PhpQualityTools
 {
     /**
@@ -27,13 +29,13 @@ class PhpQualityTools
         $composerJson = $composerJson = $destination . '/composer.json';
         $composerSettings = $this->readComposerJson($composerJson);
 
-        if (empty($composerSettings['scripts'])) {
-            $composerSettings['scripts'] = [];
+        if (empty($composerSettings->scripts)) {
+            $composerSettings['scripts'] = new \stdClass();
         }
 
-        $composerSettings['scripts'] = array_merge(
-            $composerSettings['scripts'],
-            $this->getComposerScripts()
+        $composerSettings->scripts = (object) array_merge(
+            (array) $composerSettings->scripts,
+            (array) $this->getComposerScripts()
         );
 
         $this->writeComposerJson($composerJson, $composerSettings);
@@ -59,11 +61,11 @@ class PhpQualityTools
 
     /**
      * @param string $composerJson
-     * @return array
+     * @return object
      */
-    protected function readComposerJson(string $composerJson): array
+    protected function readComposerJson(string $composerJson): \stdClass
     {
-        return json_decode(file_get_contents($composerJson), true);
+        return json_decode(file_get_contents($composerJson));
     }
 
     /**
@@ -71,15 +73,15 @@ class PhpQualityTools
      * @param array $composerSettings
      * @return bool|int
      */
-    protected function writeComposerJson(string $composerJson, array $composerSettings)
+    protected function writeComposerJson(string $composerJson, \stdClass $composerSettings)
     {
         return file_put_contents(
             $composerJson,
             json_encode(
                 $composerSettings,
-                JSON_PRETTY_PRINT +
-                JSON_UNESCAPED_LINE_TERMINATORS +
-                JSON_UNESCAPED_SLASHES +
+                JSON_PRETTY_PRINT |
+                JSON_UNESCAPED_LINE_TERMINATORS |
+                JSON_UNESCAPED_SLASHES |
                 JSON_UNESCAPED_UNICODE
             )
         );
