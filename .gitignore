@@ -1,2 +1,6 @@
 
 .idea/
+.php_cs.cache
+build/
+vendor/
+coverage/
