@@ -16,7 +16,7 @@ composer require --dev squizlabs/php_codesniffer phpstan/phpstan phpmd/phpmd fri
             "vendor/bin/phpstan analyze src"
         ],
         "inspect-fix": "vendor/bin/php-cs-fixer fix src",
-        "insights" : "vendor/bin/phpmd src text phpmd.xml",
+        "insights" : "vendor/bin/phpmd src text phpmd.xml"
     }
 }
 ```
