@@ -22,9 +22,17 @@ class InstallTest extends TestCase
     {
         parent::tearDown();
 
-        unlink(__DIR__ . '/phpcs.xml');
-        unlink(__DIR__ . '/phpmd.xml');
-        unlink(__DIR__ . '/composer.json');
+        if (file_exists(__DIR__ . '/phpcs.xml')) {
+            unlink(__DIR__ . '/phpcs.xml');
+        }
+
+        if (file_exists(__DIR__ . '/phpmd.xml')) {
+            unlink(__DIR__ . '/phpmd.xml');
+        }
+
+        if (file_exists(__DIR__ . '/composer.json')) {
+            unlink(__DIR__ . '/composer.json');
+        }
     }
 
     /** @test */
@@ -32,6 +40,19 @@ class InstallTest extends TestCase
     {
         $qualityTools = new PhpQualityTools('src');
         $qualityTools->install(__DIR__);
+
+        $this->assertFileEquals(__DIR__ . '/expected/phpcs.xml', __DIR__ . '/phpcs.xml');
+        $this->assertFileEquals(__DIR__ . '/expected/phpmd.xml', __DIR__ . '/phpmd.xml');
+        $this->assertJsonFileEqualsJsonFile(__DIR__ . '/expected/composer.json', __DIR__ . '/composer.json');
+    }
+
+    /** @test */
+    public function can_install_the_package_with_install_php()
+    {
+        chdir(__DIR__);
+        mkdir('src');
+        require __DIR__ . '/../src/install.php';
+        rmdir('src');
 
         $this->assertFileEquals(__DIR__ . '/expected/phpcs.xml', __DIR__ . '/phpcs.xml');
         $this->assertFileEquals(__DIR__ . '/expected/phpmd.xml', __DIR__ . '/phpmd.xml');
@@ -53,17 +74,14 @@ class InstallTest extends TestCase
     }
 
     /** @test */
-    public function test_directory_guess()
+    public function can_guess_the_directory()
     {
         chdir(__DIR__);
+        require_once __DIR__ . '/../src/helpers.php';
 
         mkdir('src');
-        require __DIR__ . '/../src/install.php';
+        $this->assertEquals('src', guessSrcDirectory(__DIR__));
         rmdir('src');
-
-        $this->assertFileEquals(__DIR__ . '/expected/phpcs.xml', __DIR__ . '/phpcs.xml');
-        $this->assertFileEquals(__DIR__ . '/expected/phpmd.xml', __DIR__ . '/phpmd.xml');
-        $this->assertJsonFileEqualsJsonFile(__DIR__ . '/expected/composer.json', __DIR__ . '/composer.json');
 
 
         mkdir('app');
