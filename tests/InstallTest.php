@@ -71,7 +71,7 @@ class InstallTest extends TestCase
         $this->assertEquals($jsonSettings['scripts']['inspect-fix'],
             [
                 sprintf("vendor/bin/php-cs-fixer fix %s", $this->srcDirectory),
-                "vendor/bin/phpcbf"
+                sprintf("vendor/bin/phpcbf %s", $this->srcDirectory)
             ]
         );
 

@@ -45,7 +45,7 @@
     ],
     "inspect-fix": [
       "vendor/bin/php-cs-fixer fix src",
-      "vendor/bin/phpcbf"
+      "vendor/bin/phpcbf src"
     ],
     "insights": "vendor/bin/phpmd src text phpmd.xml"
   },

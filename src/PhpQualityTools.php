@@ -3,6 +3,7 @@
 namespace DanielWerner\PhpQualityTools;
 
 use Composer\Json\JsonFormatter;
+use \stdClass;
 
 class PhpQualityTools
 {
@@ -44,7 +45,7 @@ class PhpQualityTools
         $composerSettings = $this->readComposerJson($composerJson);
 
         if (empty($composerSettings->scripts)) {
-            $composerSettings['scripts'] = new \stdClass();
+            $composerSettings['scripts'] = new stdClass();
         }
 
         $composerSettings->scripts = (object) array_merge(
@@ -67,7 +68,7 @@ class PhpQualityTools
             ],
             "inspect-fix" => [
                 sprintf("vendor/bin/php-cs-fixer fix %s", $this->srcDirectory),
-                sprintf("vendor/bin/phpcbf", $this->srcDirectory)
+                sprintf("vendor/bin/phpcbf %s", $this->srcDirectory)
             ],
             "insights" => sprintf("vendor/bin/phpmd %s text phpmd.xml", $this->srcDirectory)
         ];
