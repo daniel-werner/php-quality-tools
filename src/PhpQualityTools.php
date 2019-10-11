@@ -7,6 +7,20 @@ use Composer\Json\JsonFormatter;
 class PhpQualityTools
 {
     /**
+     * @var string $srcDirectory
+     */
+    protected $srcDirectory;
+
+    /**
+     * PhpQualityTools constructor.
+     * @param string $srcDirectory
+     */
+    public function __construct(string $srcDirectory)
+    {
+        $this->srcDirectory = $srcDirectory;
+    }
+
+    /**
      * @param string $destination
      */
     public function install($destination)
@@ -48,14 +62,14 @@ class PhpQualityTools
     {
         return [
             "inspect" => [
-                "vendor/bin/phpcs",
-                "vendor/bin/phpstan analyze src"
+                sprintf("vendor/bin/phpcs %s", $this->srcDirectory),
+                sprintf("vendor/bin/phpstan analyze %s", $this->srcDirectory)
             ],
             "inspect-fix" => [
-                "vendor/bin/php-cs-fixer fix src",
-                "vendor/bin/phpcbf"
+                sprintf("vendor/bin/php-cs-fixer fix %s", $this->srcDirectory),
+                sprintf("vendor/bin/phpcbf", $this->srcDirectory)
             ],
-            "insights" => "vendor/bin/phpmd src text phpmd.xml"
+            "insights" => sprintf("vendor/bin/phpmd %s text phpmd.xml", $this->srcDirectory)
         ];
     }
 

@@ -9,5 +9,7 @@ foreach ($autoloaders as $autoloader) {
     }
 }
 
-$phpQualityTools = new DanielWerner\PhpQualityTools\PhpQualityTools();
+$srcDirectory = $argv[1] ?? 'src';
+$phpQualityTools = new DanielWerner\PhpQualityTools\PhpQualityTools($srcDirectory);
+
 $phpQualityTools->install(getcwd());
