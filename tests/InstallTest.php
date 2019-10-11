@@ -39,10 +39,35 @@ class InstallTest extends TestCase
     }
 
     /** @test */
+    public function test_directory_guess()
+    {
+        chdir(__DIR__);
+
+        mkdir('src');
+        require __DIR__ . '/../src/install.php';
+        rmdir('src');
+
+        $this->assertFileEquals(__DIR__ . '/expected/phpcs.xml', __DIR__ . '/phpcs.xml');
+        $this->assertFileEquals(__DIR__ . '/expected/phpmd.xml', __DIR__ . '/phpmd.xml');
+        $this->assertJsonFileEqualsJsonFile(__DIR__ . '/expected/composer.json', __DIR__ . '/composer.json');
+
+
+        mkdir('app');
+        $this->assertEquals('app', guessSrcDirectory(__DIR__));
+        rmdir('app');
+
+        $this->assertEquals('.', guessSrcDirectory(__DIR__));
+
+    }
+
+    /** @test */
     public function can_install_the_package_from_command_line()
     {
         chdir(__DIR__);
+
+        mkdir('src');
         exec(__DIR__ . '/../bin/phpqt-install');
+        rmdir('src');
 
         $this->assertFileEquals(__DIR__ . '/expected/phpcs.xml', __DIR__ . '/phpcs.xml');
         $this->assertFileEquals(__DIR__ . '/expected/phpmd.xml', __DIR__ . '/phpmd.xml');
@@ -76,7 +101,7 @@ class InstallTest extends TestCase
         );
 
         $this->assertEquals($jsonSettings['scripts']['insights'],
-                sprintf("vendor/bin/phpmd %s text phpmd.xml", $this->srcDirectory)
+            sprintf("vendor/bin/phpmd %s text phpmd.xml", $this->srcDirectory)
         );
 
     }
