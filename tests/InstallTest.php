@@ -41,8 +41,7 @@ class InstallTest extends TestCase
         $qualityTools = new PhpQualityTools('src');
         $qualityTools->install(__DIR__);
 
-        $this->assertFileEquals(__DIR__ . '/expected/phpcs.xml', __DIR__ . '/phpcs.xml');
-        $this->assertFileEquals(__DIR__ . '/expected/phpmd.xml', __DIR__ . '/phpmd.xml');
+        $this->assertXmlFilesExist();
         $this->assertJsonFileEqualsJsonFile(__DIR__ . '/expected/composer.json', __DIR__ . '/composer.json');
     }
 
@@ -54,8 +53,7 @@ class InstallTest extends TestCase
         require __DIR__ . '/../src/install.php';
         rmdir('src');
 
-        $this->assertFileEquals(__DIR__ . '/expected/phpcs.xml', __DIR__ . '/phpcs.xml');
-        $this->assertFileEquals(__DIR__ . '/expected/phpmd.xml', __DIR__ . '/phpmd.xml');
+        $this->assertXmlFilesExist();
         $this->assertJsonFileEqualsJsonFile(__DIR__ . '/expected/composer.json', __DIR__ . '/composer.json');
     }
 
@@ -68,8 +66,7 @@ class InstallTest extends TestCase
         $qualityTools = new PhpQualityTools('src');
         $qualityTools->install(__DIR__);
 
-        $this->assertFileEquals(__DIR__ . '/expected/phpcs.xml', __DIR__ . '/phpcs.xml');
-        $this->assertFileEquals(__DIR__ . '/expected/phpmd.xml', __DIR__ . '/phpmd.xml');
+        $this->assertXmlFilesExist();
         $this->assertJsonFileEqualsJsonFile(__DIR__ . '/expected/composer_no_script.json', __DIR__ . '/composer.json');
     }
 
@@ -101,8 +98,7 @@ class InstallTest extends TestCase
         exec(__DIR__ . '/../bin/phpqt-install');
         rmdir('src');
 
-        $this->assertFileEquals(__DIR__ . '/expected/phpcs.xml', __DIR__ . '/phpcs.xml');
-        $this->assertFileEquals(__DIR__ . '/expected/phpmd.xml', __DIR__ . '/phpmd.xml');
+        $this->assertXmlFilesExist();
         $this->assertJsonFileEqualsJsonFile(__DIR__ . '/expected/composer.json', __DIR__ . '/composer.json');
 
     }
@@ -136,5 +132,11 @@ class InstallTest extends TestCase
             sprintf("vendor/bin/phpmd %s text phpmd.xml", $this->srcDirectory)
         );
 
+    }
+
+    protected function assertXmlFilesExist(): void
+    {
+        $this->assertFileEquals(__DIR__ . '/expected/phpcs.xml', __DIR__ . '/phpcs.xml');
+        $this->assertFileEquals(__DIR__ . '/expected/phpmd.xml', __DIR__ . '/phpmd.xml');
     }
 }
