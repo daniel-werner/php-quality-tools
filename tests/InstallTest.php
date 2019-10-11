@@ -33,9 +33,9 @@ class InstallTest extends TestCase
         $qualityTools = new PhpQualityTools('src');
         $qualityTools->install(__DIR__);
 
-        $this->assertFileExists(__DIR__ . '/phpcs.xml');
-        $this->assertFileExists(__DIR__ . '/phpmd.xml');
-        $this->assertJsonFileEqualsJsonFile(__DIR__ . '/../composer.json', __DIR__ . '/composer.json');
+        $this->assertFileEquals(__DIR__ . '/expected/phpcs.xml', __DIR__ . '/phpcs.xml');
+        $this->assertFileEquals(__DIR__ . '/expected/phpmd.xml', __DIR__ . '/phpmd.xml');
+        $this->assertJsonFileEqualsJsonFile(__DIR__ . '/expected/composer.json', __DIR__ . '/composer.json');
     }
 
     /** @test */
@@ -44,9 +44,9 @@ class InstallTest extends TestCase
         chdir(__DIR__);
         exec(__DIR__ . '/../bin/phpqt-install');
 
-        $this->assertFileExists(__DIR__ . '/phpcs.xml');
-        $this->assertFileExists(__DIR__ . '/phpmd.xml');
-        $this->assertJsonFileEqualsJsonFile(__DIR__ . '/../composer.json', __DIR__ . '/composer.json');
+        $this->assertFileEquals(__DIR__ . '/expected/phpcs.xml', __DIR__ . '/phpcs.xml');
+        $this->assertFileEquals(__DIR__ . '/expected/phpmd.xml', __DIR__ . '/phpmd.xml');
+        $this->assertJsonFileEqualsJsonFile(__DIR__ . '/expected/composer.json', __DIR__ . '/composer.json');
 
     }
 
@@ -56,8 +56,8 @@ class InstallTest extends TestCase
         chdir(__DIR__);
         exec(__DIR__ . '/../bin/phpqt-install ' . $this->srcDirectory);
 
-        $this->assertFileExists(__DIR__ . '/phpcs.xml');
-        $this->assertFileExists(__DIR__ . '/phpmd.xml');
+        $this->assertFileExists(__DIR__ . '/expected/phpcs.xml');
+        $this->assertFileExists(__DIR__ . '/expected/phpmd.xml');
 
         $jsonSettings = json_decode(file_get_contents(__DIR__ . '/composer.json'), true);
 
