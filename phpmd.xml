@@ -8,7 +8,6 @@
         Inspired by https://github.com/phpmd/phpmd/issues/137
         using http://phpmd.org/documentation/creating-a-ruleset.html
     </description>
-    <!-- se importan los rulesets, en este caso todos. -->
     <rule ref="rulesets/cleancode.xml">
         <exclude name="StaticAccess"/>
         <exclude name="BooleanArgumentFlag"/>
