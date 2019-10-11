@@ -39,6 +39,20 @@ class InstallTest extends TestCase
     }
 
     /** @test */
+    public function can_install_the_package_without_script_in_composer_json()
+    {
+        unlink(__DIR__ . '/composer.json');
+        copy(__DIR__ . '/resources/composer_no_script.json', __DIR__ . '/composer.json');
+
+        $qualityTools = new PhpQualityTools('src');
+        $qualityTools->install(__DIR__);
+
+        $this->assertFileEquals(__DIR__ . '/expected/phpcs.xml', __DIR__ . '/phpcs.xml');
+        $this->assertFileEquals(__DIR__ . '/expected/phpmd.xml', __DIR__ . '/phpmd.xml');
+        $this->assertJsonFileEqualsJsonFile(__DIR__ . '/expected/composer_no_script.json', __DIR__ . '/composer.json');
+    }
+
+    /** @test */
     public function test_directory_guess()
     {
         chdir(__DIR__);

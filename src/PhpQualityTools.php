@@ -45,7 +45,7 @@ class PhpQualityTools
         $composerSettings = $this->readComposerJson($composerJson);
 
         if (empty($composerSettings->scripts)) {
-            $composerSettings['scripts'] = new stdClass();
+            $composerSettings->scripts = new stdClass();
         }
 
         $composerSettings->scripts = (object) array_merge(
