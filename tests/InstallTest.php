@@ -41,7 +41,7 @@ class InstallTest extends TestCase
         $qualityTools = new PhpQualityTools('src');
         $qualityTools->install(__DIR__);
 
-        $this->assertXmlFilesExist();
+        $this->assertXmlFilesEquals();
         $this->assertJsonFileEqualsJsonFile(__DIR__ . '/expected/composer.json', __DIR__ . '/composer.json');
     }
 
@@ -53,7 +53,7 @@ class InstallTest extends TestCase
         require __DIR__ . '/../src/install.php';
         rmdir('src');
 
-        $this->assertXmlFilesExist();
+        $this->assertXmlFilesEquals();
         $this->assertJsonFileEqualsJsonFile(__DIR__ . '/expected/composer.json', __DIR__ . '/composer.json');
     }
 
@@ -66,7 +66,7 @@ class InstallTest extends TestCase
         $qualityTools = new PhpQualityTools('src');
         $qualityTools->install(__DIR__);
 
-        $this->assertXmlFilesExist();
+        $this->assertXmlFilesEquals();
         $this->assertJsonFileEqualsJsonFile(__DIR__ . '/expected/composer_no_script.json', __DIR__ . '/composer.json');
     }
 
@@ -98,7 +98,7 @@ class InstallTest extends TestCase
         exec(__DIR__ . '/../bin/phpqt-install');
         rmdir('src');
 
-        $this->assertXmlFilesExist();
+        $this->assertXmlFilesEquals();
         $this->assertJsonFileEqualsJsonFile(__DIR__ . '/expected/composer.json', __DIR__ . '/composer.json');
 
     }
@@ -109,8 +109,7 @@ class InstallTest extends TestCase
         chdir(__DIR__);
         exec(__DIR__ . '/../bin/phpqt-install ' . $this->srcDirectory);
 
-        $this->assertFileExists(__DIR__ . '/expected/phpcs.xml');
-        $this->assertFileExists(__DIR__ . '/expected/phpmd.xml');
+        $this->assertXmlFilesEquals();
 
         $jsonSettings = json_decode(file_get_contents(__DIR__ . '/composer.json'), true);
 
@@ -134,7 +133,7 @@ class InstallTest extends TestCase
 
     }
 
-    protected function assertXmlFilesExist(): void
+    protected function assertXmlFilesEquals(): void
     {
         $this->assertFileEquals(__DIR__ . '/expected/phpcs.xml', __DIR__ . '/phpcs.xml');
         $this->assertFileEquals(__DIR__ . '/expected/phpmd.xml', __DIR__ . '/phpmd.xml');
