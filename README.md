@@ -44,10 +44,10 @@ After the installation the xml configurations can be found in your projects root
 ## Usage
 
 The package defines the following scripts in the `composer.json`:
-- `composer inspect`: this command runs the PHP Code Sniffer and the PHP Static Analysis Tool.
-It will analyze your code style and run the PHP Static Analysis Tool with the default minimum level=0
+- `composer inspect`: this command runs the PHP Code Sniffer (phpcs) and the PHP Static Analysis Tool (phpstan).
+It will analyze your code style and run the phpstan with the default minimum level=0
 - `composer inspect-fix`: this command will try to fix the problems found by the inspection
-by running the PHP Coding Standards Fixer and the PHP Code Beautifier and Fixer.
+by running the PHP Coding Standards Fixer (php-cs-fixer) and the PHP Code Beautifier and Fixer (phpcbf).
 - `composer insights`: runs the PHP Mess Detector to find any potential issues in your code.
 
 ### Testing
