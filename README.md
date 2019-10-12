@@ -9,7 +9,7 @@ This package installs the most commonly used quality tools for php: [PHP Code Sn
  [PHP Mess Detector](https://phpmd.org/), [PHP Static Analysis Tool](https://github.com/phpstan/phpstan) and [PHP Coding Standards Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer).
  It comes with some reasonable predefined configurations and using the PSR-2 coding style. This package can be used with Laravel applications or with any php project it is not specifically a Laravel package.
 
- The purpose of this package is to allow the developers to quickly install and configure
+ The purpose of this package is to allow php developers to quickly install and configure
  all the necessary quality tools for their projects.
 
 ## Installation
