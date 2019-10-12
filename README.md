@@ -5,23 +5,22 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/daniel-werner/php-quality-tools.svg?style=flat-square)](https://scrutinizer-ci.com/g/daniel-werner/php-quality-tools)
 [![Total Downloads](https://img.shields.io/packagist/dt/daniel-werner/php-quality-tools.svg?style=flat-square)](https://packagist.org/packages/daniel-werner/php-quality-tools)
 
-This package installs the most common quality tools for php: [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer),
+This package installs the most commonly used quality tools for php: [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer),
  [PHP Mess Detector](https://phpmd.org/), [PHP Static Analysis Tool](https://github.com/phpstan/phpstan) and [PHP Coding Standards Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer),
- with some reasonable predefined configurations for Laravel using PSR2 coding standard. This package can be used with any
- php project it is not specifically a Laravel package.
+ with some reasonable predefined configurations using the PSR2 coding standard. This package can be used with Laravel applications or with any php project it is not specifically a Laravel package.
 
- The purpose of the package is to allow the developers to qucikly install and configure
- all the necessary quality tools for the project.
+ The purpose of this package is to allow the developers to quickly install and configure
+ all the necessary quality tools for their projects.
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require daniel-werner/php-quality-tools
+composer require --dev daniel-werner/php-quality-tools
 ```
 
-After the composer install, run the following command to copy the default xml settings for the tools and
+After the installing with composer, run the following command to copy the default xml settings for the tools and
 to set up the scripts in the `composer.json`.
 
 ```bash
