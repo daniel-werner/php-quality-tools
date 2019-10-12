@@ -6,8 +6,8 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/daniel-werner/php-quality-tools.svg?style=flat-square)](https://packagist.org/packages/daniel-werner/php-quality-tools)
 
 This package installs the most commonly used quality tools for php: [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer),
- [PHP Mess Detector](https://phpmd.org/), [PHP Static Analysis Tool](https://github.com/phpstan/phpstan) and [PHP Coding Standards Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer),
- with some reasonable predefined configurations using the PSR2 coding standard. This package can be used with Laravel applications or with any php project it is not specifically a Laravel package.
+ [PHP Mess Detector](https://phpmd.org/), [PHP Static Analysis Tool](https://github.com/phpstan/phpstan) and [PHP Coding Standards Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer).
+ It comes with some reasonable predefined configurations using the PSR2 coding standard. This package can be used with Laravel applications or with any php project it is not specifically a Laravel package.
 
  The purpose of this package is to allow the developers to quickly install and configure
  all the necessary quality tools for their projects.
@@ -20,16 +20,17 @@ You can install the package via composer:
 composer require --dev daniel-werner/php-quality-tools
 ```
 
-After the installing with composer, run the following command to copy the default xml settings for the tools and
-to set up the scripts in the `composer.json`.
+After installing with composer, run the following command from the `root` directory of your project:
 
 ```bash
 vendor/bin/phpqt-install
 ```
 
+This will copy the default xml settings for the tools and to set up the scripts in the `composer.json`.
+
 The install script will try to guess the source code directory in your project,
-if it is a Laravel application it'll use the `app` directory, if it is a package
-it'll use the `src` directory, otherwise the current directory.
+if it is a Laravel application it will use the `app` directory, if it is a package
+it will use the `src` directory, otherwise the current directory.
 
 You can pass the source code directory as the first argument of the install script, like this:
 
@@ -37,15 +38,15 @@ You can pass the source code directory as the first argument of the install scri
 vendor/bin/phpqt-install my-app
 ```
 
-After installation the xml configurations can be found in your projects root directory,
- you can customize the phpcs and phpmd condguration by changing the settings in the xml files.
+After the installation the xml configurations can be found in your projects root directory.
+ You can customize the phpcs and phpmd configurations by changing the settings in the xml files.
 
 ## Usage
 
 The package defines the following script in the `composer.json`:
 - `composer inspect`: this command runs the PHP Code Sniffer and the PHP Static Analysis Tool.
-This will analyze your code style and run the phpstan with the default minimum level=0
-- `composer inspect-fix`: this command will try to fix the problem found by the inspection
+It will analyze your code style and run the phpstan with the default minimum level=0
+- `composer inspect-fix`: this command will try to fix the problems found by the inspection
 by running the `php-cs-fixer` and the `phpcbf`.
 - `composer insights`: runs the PHP Mess Detector to find any potential issues in your code.
 
