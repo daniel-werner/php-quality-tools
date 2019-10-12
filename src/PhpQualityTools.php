@@ -28,6 +28,8 @@ class PhpQualityTools
     {
         $this->copyStubs($destination);
         $this->setUpComposerJson($destination);
+
+        echo 'Done.';
     }
 
     /**
@@ -35,12 +37,15 @@ class PhpQualityTools
      */
     protected function copyStubs(string $destination)
     {
+        echo 'Copying configuration files... ' . PHP_EOL;
         copy(__DIR__ . '/../phpmd.xml', $destination . '/phpmd.xml');
         copy(__DIR__ . '/../phpcs.xml', $destination . '/phpcs.xml');
     }
 
     protected function setUpComposerJson(string $destination)
     {
+        echo 'Setting up composer.json scripts... ' . PHP_EOL;
+
         $composerJson = $composerJson = $destination . '/composer.json';
         $composerSettings = $this->readComposerJson($composerJson);
 
