@@ -35,7 +35,7 @@ it will use the `src` directory, otherwise the current directory.
 You can pass the source code directory as the first argument of the install script, like this:
 
 ```bash
-vendor/bin/phpqt-install my-app
+vendor/bin/phpqt-install my-app-src
 ```
 
 After the installation the xml configurations can be found in your projects root directory.
