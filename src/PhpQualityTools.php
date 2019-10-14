@@ -24,6 +24,7 @@ class PhpQualityTools
 
     /**
      * @param string $destination
+     * @return void
      */
     public function install($destination)
     {
@@ -34,7 +35,8 @@ class PhpQualityTools
     }
 
     /**
-     * @param $destination
+     * @param string $destination
+     * @return void
      */
     protected function copyStubs(string $destination)
     {
@@ -43,6 +45,10 @@ class PhpQualityTools
         copy(__DIR__ . '/../phpcs.xml', $destination . '/phpcs.xml');
     }
 
+    /**
+     * @param string $destination
+     * @return void
+     */
     protected function setUpComposerJson(string $destination)
     {
         echo 'Setting up composer.json scripts.' . PHP_EOL;

@@ -1,6 +1,10 @@
 <?php
 
-function guessSrcDirectory($cwd)
+/**
+ * @param string $cwd
+ * @return string
+ */
+function guessSrcDirectory(string $cwd): string
 {
     if (file_exists($cwd . '/app')) {
         return 'app';
