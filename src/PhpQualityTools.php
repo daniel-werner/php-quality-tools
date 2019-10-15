@@ -2,7 +2,6 @@
 
 namespace DanielWerner\PhpQualityTools;
 
-use Composer\Json\JsonFormatter;
 use \stdClass;
 
 class PhpQualityTools
@@ -41,8 +40,17 @@ class PhpQualityTools
     protected function copyStubs(string $destination)
     {
         echo 'Copying configuration files.' . PHP_EOL;
-        copy(__DIR__ . '/../phpmd.xml', $destination . '/phpmd.xml');
-        copy(__DIR__ . '/../phpcs.xml', $destination . '/phpcs.xml');
+        if (!file_exists($destination)) {
+            if (!mkdir($destination, 0777, true)) {
+                throw new Exception('Failed to create required folders! Please check your write permission.');
+            }
+        }
+        if (!copy(__DIR__ . '/../phpmd.xml', $destination . '/phpmd.xml')) {
+            throw new \Exception('File phpmd.xml cannot be created! Please check your write permission.');
+        }
+        if (!copy(__DIR__ . '/../phpcs.xml', $destination . '/phpcs.xml')) {
+            throw new \Exception('File phpcs.xml cannot be created! Please check your write permission.');
+        }
     }
 
     /**
@@ -53,9 +61,16 @@ class PhpQualityTools
     {
         echo 'Setting up composer.json scripts.' . PHP_EOL;
 
-        $composerJson = $composerJson = $destination . '/composer.json';
+        $composerJson = $destination . '/composer.json';
+        if (!file_exists($composerJson)) {
+            throw new \Exception('File composer.json is missed! Please ensure that you are in root folder.');
+        }
         $composerSettings = $this->readComposerJson($composerJson);
-
+        
+        if (is_null($composerSettings)){
+            throw new \Exception('File composer.json is corrupted!');
+        }
+        
         if (empty($composerSettings->scripts)) {
             $composerSettings->scripts = new stdClass();
         }
@@ -65,7 +80,9 @@ class PhpQualityTools
             (array) $this->getComposerScripts()
         );
 
-        $this->writeComposerJson($composerJson, $composerSettings);
+        if (!$this->writeComposerJson($composerJson, $composerSettings)) {
+            throw new \Exception('Cannot write new composer.json!');
+        }
     }
 
     /**
@@ -92,7 +109,11 @@ class PhpQualityTools
      */
     protected function readComposerJson(string $composerJson): \stdClass
     {
-        return json_decode(file_get_contents($composerJson));
+        $content = file_get_contents($composerJson);
+        if (!$content) {
+            throw new \Exception('File composer.json is empty!');
+        }
+        return json_decode($content);
     }
 
     /**
