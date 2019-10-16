@@ -14,4 +14,8 @@ foreach ($autoloaders as $autoloader) {
 $srcDirectory = $argv[1] ?? guessSrcDirectory($cwd);
 $phpQualityTools = new DanielWerner\PhpQualityTools\PhpQualityTools($srcDirectory);
 
-$phpQualityTools->install($cwd);
+try {
+    $phpQualityTools->install($cwd);
+} catch (Exception $ex) {
+    echo $ex->getMessage();
+}

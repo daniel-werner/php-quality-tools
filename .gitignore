@@ -4,3 +4,4 @@
 build/
 vendor/
 coverage/
+/nbproject/private/
