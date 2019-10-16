@@ -133,6 +133,48 @@ class InstallTest extends TestCase
 
     }
 
+    /** @test */
+    public function can_create_directory_if_needed()
+    {
+        if (file_exists('createdDir')){
+            rmdir('createdDir');
+        }
+        
+        $class = new \ReflectionClass('DanielWerner\PhpQualityTools\PhpQualityTools');
+        $method = $class->getMethod('createDestinationIfNotExist');
+        $method->setAccessible(true);
+        $qtObject = new PhpQualityTools('src');
+        
+        $method->invokeArgs($qtObject, ['createdDir']);
+
+        $this->assertFileExists('createdDir');
+        rmdir('createdDir');
+    }
+    
+    /** @test */
+    public function throw_error_if_dir_path_is_null()
+    {      
+        $class = new \ReflectionClass('DanielWerner\PhpQualityTools\PhpQualityTools');
+        $method = $class->getMethod('createDestinationIfNotExist');
+        $method->setAccessible(true);
+
+        $this->expectException(\Exception::class);
+        $qtObject = new PhpQualityTools('src');
+        $method->invokeArgs($qtObject, [null]);
+    }
+    
+    /** @test */
+    public function throw_error_if_cant_copy_files()
+    {
+        $class = new \ReflectionClass('DanielWerner\PhpQualityTools\PhpQualityTools');
+        $method = $class->getMethod('copyFile');
+        $method->setAccessible(true);
+        
+        $this->expectException(\Exception::class);
+        $qtObject = new PhpQualityTools('src');
+        $method->invokeArgs($qtObject, ['file', 'dest']);
+    }
+    
     protected function assertXmlFilesEquals(): void
     {
         $this->assertFileEquals(__DIR__ . '/expected/phpcs.xml', __DIR__ . '/phpcs.xml');

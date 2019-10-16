@@ -40,17 +40,9 @@ class PhpQualityTools
     protected function copyStubs(string $destination)
     {
         echo 'Copying configuration files.' . PHP_EOL;
-        if (!file_exists($destination)) {
-            if (!mkdir($destination, 0777, true)) {
-                throw new Exception('Failed to create required folders! Please check your write permission.');
-            }
-        }
-        if (!copy(__DIR__ . '/../phpmd.xml', $destination . '/phpmd.xml')) {
-            throw new \Exception('File phpmd.xml cannot be created! Please check your write permission.');
-        }
-        if (!copy(__DIR__ . '/../phpcs.xml', $destination . '/phpcs.xml')) {
-            throw new \Exception('File phpcs.xml cannot be created! Please check your write permission.');
-        }
+        $this->createDestinationIfNotExist($destination);
+        $this->copyFile('phpmd.xml', $destination);
+        $this->copyFile('phpcs.xml', $destination);
     }
 
     /**
@@ -134,4 +126,24 @@ class PhpQualityTools
             )
         );
     }
+
+    private function createDestinationIfNotExist($destination) 
+    {
+        if (is_null($destination)) {
+            throw new \Exception('Failed to create required folders!');
+        }
+        if (!file_exists($destination)) {
+            if (!mkdir($destination, 0777, true)) {
+                throw new \Exception('Failed to create required folders! Please check your write permission.');
+            }
+        }    
+    }
+
+    private function copyFile($filename, $destination) 
+    {
+        if (!file_exists(__DIR__ . "/../$filename") || !copy(__DIR__ . "/../$filename", $destination . "/$filename")) {
+            throw new \Exception(sprintf("File %s cannot be created! Please check your write permission.", $filename));
+        }
+    }
+
 }
