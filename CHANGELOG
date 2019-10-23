@@ -2,5 +2,8 @@
 VERSION 1  FIRST RELEASE
 ========================
 
+   Version 1.1 - Added error handling, and fixed the bcomposer script paths for windows
+      23/10/2019 19:59  1.1.0  initial release
+
    Version 1.0 - First release
       12/10/2019 19:37  1.0.0  initial release
