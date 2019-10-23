@@ -115,20 +115,20 @@ class InstallTest extends TestCase
 
         $this->assertEquals($jsonSettings['scripts']['inspect'],
             [
-                sprintf("vendor/bin/phpcs %s", $this->srcDirectory),
-                sprintf("vendor/bin/phpstan analyze %s", $this->srcDirectory)
+                sprintf("phpcs %s", $this->srcDirectory),
+                sprintf("phpstan analyze %s", $this->srcDirectory)
             ]
         );
 
         $this->assertEquals($jsonSettings['scripts']['inspect-fix'],
             [
-                sprintf("vendor/bin/php-cs-fixer fix %s", $this->srcDirectory),
-                sprintf("vendor/bin/phpcbf %s", $this->srcDirectory)
+                sprintf("php-cs-fixer fix %s", $this->srcDirectory),
+                sprintf("phpcbf %s", $this->srcDirectory)
             ]
         );
 
         $this->assertEquals($jsonSettings['scripts']['insights'],
-            sprintf("vendor/bin/phpmd %s text phpmd.xml", $this->srcDirectory)
+            sprintf("phpmd %s text phpmd.xml", $this->srcDirectory)
         );
 
     }
