@@ -37,8 +37,8 @@
     },
     "bin": ["bin/phpqt-install"],
     "scripts": {
-        "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+        "test": "phpunit",
+        "test-coverage": "phpunit --coverage-html coverage"
 
     },
     "config": {
