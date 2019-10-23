@@ -3,6 +3,7 @@
 namespace DanielWerner\PhpQualityTools;
 
 use \stdClass;
+use \Exception;
 
 class PhpQualityTools
 {
@@ -22,8 +23,8 @@ class PhpQualityTools
     }
 
     /**
-     * @param string $destination
-     * @return void
+     * @param $destination
+     * @throws Exception
      */
     public function install($destination)
     {
@@ -35,7 +36,7 @@ class PhpQualityTools
 
     /**
      * @param string $destination
-     * @return void
+     * @throws Exception
      */
     protected function copyStubs(string $destination)
     {
@@ -47,7 +48,7 @@ class PhpQualityTools
 
     /**
      * @param string $destination
-     * @return void
+     * @throws Exception
      */
     protected function setUpComposerJson(string $destination)
     {
@@ -55,12 +56,12 @@ class PhpQualityTools
 
         $composerJson = $destination . '/composer.json';
         if (!file_exists($composerJson)) {
-            throw new \Exception('File composer.json is missed! Please ensure that you are in root folder.');
+            throw new Exception('File composer.json is missed! Please ensure that you are in root folder.');
         }
         $composerSettings = $this->readComposerJson($composerJson);
         
-        if (is_null($composerSettings)){
-            throw new \Exception('File composer.json is corrupted!');
+        if (is_null($composerSettings)) {
+            throw new Exception('File composer.json is corrupted!');
         }
         
         if (empty($composerSettings->scripts)) {
@@ -73,7 +74,7 @@ class PhpQualityTools
         );
 
         if (!$this->writeComposerJson($composerJson, $composerSettings)) {
-            throw new \Exception('Cannot write new composer.json!');
+            throw new Exception('Cannot write new composer.json!');
         }
     }
 
@@ -97,23 +98,24 @@ class PhpQualityTools
 
     /**
      * @param string $composerJson
-     * @return object
+     * @return stdClass
+     * @throws Exception
      */
     protected function readComposerJson(string $composerJson): \stdClass
     {
         $content = file_get_contents($composerJson);
         if (!$content) {
-            throw new \Exception('File composer.json is empty!');
+            throw new Exception('File composer.json is empty!');
         }
         return json_decode($content);
     }
 
     /**
      * @param string $composerJson
-     * @param array $composerSettings
+     * @param stdClass $composerSettings
      * @return bool|int
      */
-    protected function writeComposerJson(string $composerJson, \stdClass $composerSettings)
+    protected function writeComposerJson(string $composerJson, stdClass $composerSettings)
     {
         return file_put_contents(
             $composerJson,
@@ -127,23 +129,22 @@ class PhpQualityTools
         );
     }
 
-    private function createDestinationIfNotExist($destination) 
+    private function createDestinationIfNotExist($destination)
     {
         if (is_null($destination)) {
-            throw new \Exception('Failed to create required folders!');
+            throw new Exception('Failed to create required folders!');
         }
         if (!file_exists($destination)) {
             if (!mkdir($destination, 0777, true)) {
-                throw new \Exception('Failed to create required folders! Please check your write permission.');
+                throw new Exception('Failed to create required folders! Please check your write permission.');
             }
-        }    
-    }
-
-    private function copyFile($filename, $destination) 
-    {
-        if (!file_exists(__DIR__ . "/../$filename") || !copy(__DIR__ . "/../$filename", $destination . "/$filename")) {
-            throw new \Exception(sprintf("File %s cannot be created! Please check your write permission.", $filename));
         }
     }
 
+    private function copyFile($filename, $destination)
+    {
+        if (!file_exists(__DIR__ . "/../$filename") || !copy(__DIR__ . "/../$filename", $destination . "/$filename")) {
+            throw new Exception(sprintf("File %s cannot be created! Please check your write permission.", $filename));
+        }
+    }
 }
