@@ -2,6 +2,9 @@
 VERSION 1  FIRST RELEASE
 ========================
 
+   Version 1.2 - Updated phpstan to 0.12
+      24/01/2020 10:58  1.2.0  initial release
+
    Version 1.1 - Added error handling, and fixed the bcomposer script paths for windows
       23/10/2019 19:59  1.1.0  initial release
 
