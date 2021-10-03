@@ -1,5 +1,5 @@
 {
-    "name": "daniel-werner/php-quality-tools",
+    "name": "tspencer244/php-quality-tools",
     "description": "Opinionated package for easy install php quality tools with a reasonable default setup",
     "keywords": [
         "daniel-werner",
@@ -17,10 +17,10 @@
     ],
     "require": {
         "php": "^7.1",
-        "friendsofphp/php-cs-fixer": "^2.15",
-        "phpmd/phpmd": "^2.7",
-        "phpstan/phpstan": "^0.12.7",
-        "squizlabs/php_codesniffer": "^3.5"
+        "friendsofphp/php-cs-fixer": "^3.1",
+        "phpmd/phpmd": "^2.10",
+        "phpstan/phpstan": "^0.12.99",
+        "squizlabs/php_codesniffer": "^3.6"
     },
     "require-dev": {
         "liip/rmt": "^1.5",
