@@ -2,6 +2,9 @@
 VERSION 2  UPDATE UNDERLYING TOOLS
 ==================================
 
+   Version 2.1 - PHP 8 support
+      31/10/2021 15:54  2.1.0  initial release
+
    Version 2.0 - Update underlying tools
       31/10/2021 15:48  2.0.0  initial release
 
