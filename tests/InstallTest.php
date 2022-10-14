@@ -12,13 +12,13 @@ class InstallTest extends TestCase
      */
     protected $srcDirectory = 'app';
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         copy(__DIR__ . '/resources/composer.json', __DIR__ . '/composer.json');
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
 
