@@ -2,8 +2,8 @@
 
 namespace DanielWerner\PhpQualityTools;
 
-use \stdClass;
-use \Exception;
+use stdClass;
+use Exception;
 
 class PhpQualityTools
 {
@@ -59,11 +59,11 @@ class PhpQualityTools
             throw new Exception('File composer.json is missed! Please ensure that you are in root folder.');
         }
         $composerSettings = $this->readComposerJson($composerJson);
-        
+
         if (is_null($composerSettings)) {
             throw new Exception('File composer.json is corrupted!');
         }
-        
+
         if (empty($composerSettings->scripts)) {
             $composerSettings->scripts = new stdClass();
         }
