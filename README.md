@@ -2,7 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/daniel-werner/php-quality-tools.svg?style=flat-square)](https://packagist.org/packages/daniel-werner/php-quality-tools)
 [![Build Status](https://img.shields.io/travis/daniel-werner/php-quality-tools/master.svg?style=flat-square)](https://travis-ci.org/daniel-werner/php-quality-tools)
-[![Build Status](https://github.com/daniel-werner/php-quality-tools/actions/workflows/test.yml/badge.svg)](https://github.com/wdev-rs/laravel-datagrid/actions/workflows/test.yml)
+[![Build Status](https://github.com/daniel-werner/php-quality-tools/actions/workflows/test.yml/badge.svg)](https://github.com/daniel-werner/php-quality-tools/actions/workflows/test.yml)
 [![Quality Score](https://img.shields.io/scrutinizer/g/daniel-werner/php-quality-tools.svg?style=flat-square)](https://scrutinizer-ci.com/g/daniel-werner/php-quality-tools)
 [![Total Downloads](https://img.shields.io/packagist/dt/daniel-werner/php-quality-tools.svg?style=flat-square)](https://packagist.org/packages/daniel-werner/php-quality-tools)
 
